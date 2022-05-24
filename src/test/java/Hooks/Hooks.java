@@ -25,7 +25,10 @@ public class Hooks {
     public void initLog4j() {
         String log4jConfPath = "log4j.properties";
         PropertyConfigurator.configure(log4jConfPath);
+    }
 
+    @Before
+    public void setup(){
         LogUtils.logInfo("Started Scenario: "+getScenarioName());
     }
 

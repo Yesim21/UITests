@@ -7,28 +7,16 @@ import java.time.Duration;
 
 public class Helper {
 
-    public static void waitAndClick(WebElement element, int timeout) {
-        for (int i = 0; i < timeout; i++) {
-            try {
-                element.click();
-                return;
-            } catch (WebDriverException e) {
-                wait(1);
-            }
-        }
+    static int timeOut = 10;
+
+    public static void waitAndClick(WebDriver driver, WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
+        WebElement element2 = wait.until(ExpectedConditions.elementToBeClickable(element));
+        element2.click();
     }
 
-    public static void wait(int secs) {
-
-        try {
-            Thread.sleep(1000 * secs);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static WebElement waitForVisibility(WebElement element, int timeToWaitInSec) {
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeToWaitInSec));
+    public static WebElement waitForVisibility(WebDriver driver, WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 }
